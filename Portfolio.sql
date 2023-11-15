@@ -1,10 +1,9 @@
 --Checking tables
+SELECT * 
+FROM Portfolio..CovidDeaths;
 
---SELECT * 
---FROM Portfolio..CovidDeaths;
-
---SELECT *
---FROM Portfolio..CovidVaccinations;
+SELECT *
+FROM Portfolio..CovidVaccinations;
 
 
 --**********************************DATA EXPLORATION*****************************
@@ -12,45 +11,45 @@
 
 --Selecting the data we are goign to be using:
 
---SELECT location, date, ROUND(total_cases,0), new_cases, ROUND(total_deaths,0), population
---FROM Portfolio..CovidDeaths
---WHERE location = 'Tunisia'
---ORDER BY 2,3 ASC;
+SELECT location, date, ROUND(total_cases,0), new_cases, ROUND(total_deaths,0), population
+FROM Portfolio..CovidDeaths
+WHERE location = 'Tunisia'
+ORDER BY 2,3 ASC;
 
 --total cases VS total deaths in Tunisia;
 --likelihood of dying if you get covid in Tunisia at the time:
---SELECT location, date, ROUND(total_cases,0) AS TotalCases, ROUND(total_deaths,0) AS TotalDeaths, ROUND(((total_deaths/total_cases)*100),2) AS DeathsPercentage
---FROM Portfolio..CovidDeaths
---WHERE location = 'Tunisia'
---ORDER BY date;
+SELECT location, date, ROUND(total_cases,0) AS TotalCases, ROUND(total_deaths,0) AS TotalDeaths, ROUND(((total_deaths/total_cases)*100),2) AS DeathsPercentage
+FROM Portfolio..CovidDeaths
+WHERE location = 'Tunisia'
+ORDER BY date;
 
 
 --total cases VS population in Tunisia:
 --Percentage of population that got infected by Covid 
---SELECT location, date, ROUND(population,0) as Population, ROUND(total_cases,0) as TotalCases, ROUND(((total_cases/population)*100),2) AS InfectionPercentage
---FROM Portfolio..CovidDeaths
---WHERE location = 'Tunisia'
---ORDER BY date ASC;
+SELECT location, date, ROUND(population,0) as Population, ROUND(total_cases,0) as TotalCases, ROUND(((total_cases/population)*100),2) AS InfectionPercentage
+FROM Portfolio..CovidDeaths
+WHERE location = 'Tunisia'
+ORDER BY date ASC;
 
 ----------------DELETE EVERYTHING ABOUT THE TERRORISTS----------------
---DELETE FROM Portfolio..CovidDeaths
---WHERE location = 'Israel';
+DELETE FROM Portfolio..CovidDeaths
+WHERE location = 'Israel';
 
---DELETE FROM Portfolio..CovidVaccinations
---WHERE location = 'Israel';
+DELETE FROM Portfolio..CovidVaccinations
+WHERE location = 'Israel';
 ----------------------------------------------------------------------
 
 --Countries with highest infection rate compared to thier population:
---SELECT location, population, MAX(ROUND(total_cases,0)) AS Highest_Infection_Count, MAX(ROUND(((total_cases/population)*100),2)) AS Percentage_of_Population_Infected
---FROM Portfolio..CovidDeaths
---GROUP BY location, population
---ORDER BY Percentage_of_Population_Infected DESC;
+SELECT location, population, MAX(ROUND(total_cases,0)) AS Highest_Infection_Count, MAX(ROUND(((total_cases/population)*100),2)) AS Percentage_of_Population_Infected
+FROM Portfolio..CovidDeaths
+GROUP BY location, population
+ORDER BY Percentage_of_Population_Infected DESC;
 
 --Countries with highest Death Count
---SELECT location, MAX(ROUND(total_deaths,0)) AS TotalDeathCount
---FROM Portfolio..CovidDeaths
---GROUP BY location
---ORDER BY TotalDeathCount DESC;
+SELECT location, MAX(ROUND(total_deaths,0)) AS TotalDeathCount
+FROM Portfolio..CovidDeaths
+GROUP BY location
+ORDER BY TotalDeathCount DESC;
 
 
 --***By continent***
@@ -159,9 +158,5 @@ WHERE continent is not null
 GROUP BY continent
 
 
-
------Checking in-------------
-SELECT * FROM INFORMATION_SCHEMA.TABLES;
-DROP VIEW PercentageOfPopulationVaccinate
 
 ;
